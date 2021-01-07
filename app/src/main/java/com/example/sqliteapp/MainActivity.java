@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnRegister;
+    Button btnRegister, btnSearchActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnSearchActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SearchUserActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
     private void findViews() {
 
         btnRegister = findViewById(R.id.btnRegister);
+        btnSearchActivity = findViewById(R.id.btnSearchActivity);
 
     }
 }
