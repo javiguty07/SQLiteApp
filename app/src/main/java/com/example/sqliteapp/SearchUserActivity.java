@@ -32,9 +32,31 @@ public class SearchUserActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                search();
+                //search();
+                searchBySql();
             }
         });
+    }
+
+    private void searchBySql() {
+        SQLiteDatabase db = conn.getReadableDatabase();
+        String[] params = {etId.getEditText().getText().toString()};
+
+        try {
+            //Select name,phone from users where id = ?
+            Cursor cursor = db.rawQuery("SELECT "+Utilities.FIELD_NAME + ","+Utilities.FIELD_PHONE +" FROM " + Utilities.TABLE_USERS +" WHERE "+Utilities.FIELD_ID + " =?", params);
+
+            cursor.moveToFirst();
+
+            etName.getEditText().setText(cursor.getString(0));
+            etPhone.getEditText().setText(cursor.getString(1));
+            cursor.close();
+
+        }catch(Exception e){
+
+            Toast.makeText(this, "El documento no existe", Toast.LENGTH_LONG).show();
+            clean();
+        }
     }
 
     private void findViews() {
