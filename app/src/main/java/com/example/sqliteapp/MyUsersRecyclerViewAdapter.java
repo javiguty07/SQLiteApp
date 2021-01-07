@@ -11,9 +11,10 @@ import com.example.sqliteapp.entities.User;
 
 import java.util.ArrayList;
 
-public class MyUsersRecyclerViewAdapter extends RecyclerView.Adapter<MyUsersRecyclerViewAdapter.ViewHolder> {
+public class MyUsersRecyclerViewAdapter extends RecyclerView.Adapter<MyUsersRecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
 
     ArrayList<User> userList;
+    private View.OnClickListener listener;
 
     public MyUsersRecyclerViewAdapter(ArrayList<User> items) {
         userList = items;
@@ -23,6 +24,8 @@ public class MyUsersRecyclerViewAdapter extends RecyclerView.Adapter<MyUsersRecy
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item_users, parent, false);
+
+        view.setOnClickListener(this);
         return new ViewHolder(view);
     }
 
@@ -32,11 +35,24 @@ public class MyUsersRecyclerViewAdapter extends RecyclerView.Adapter<MyUsersRecy
         holder.mIdView.setText(userList.get(position).getId().toString());
         holder.mNameView.setText(userList.get(position).getName());
         holder.mPhoneView.setText(userList.get(position).getPhone());
+
     }
 
     @Override
     public int getItemCount() {
         return userList.size();
+    }
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if (listener != null) {
+            listener.onClick(view);
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

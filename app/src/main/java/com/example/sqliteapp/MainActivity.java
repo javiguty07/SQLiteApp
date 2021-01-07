@@ -9,14 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnRegister, btnSearchActivity , btnListUsersActivity;
+    Button btnRegister, btnSearchActivity, btnListUsersActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ConectSQliteHelper conn = new ConectSQliteHelper(this,"db_users",null,1);
+        ConectSQliteHelper conn = new ConectSQliteHelper(this, "db_users", null, 1);
 
         findViews();
 

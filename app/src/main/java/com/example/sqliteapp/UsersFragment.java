@@ -1,12 +1,14 @@
 package com.example.sqliteapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -55,6 +57,21 @@ public class UsersFragment extends Fragment {
         insertUsersToUsersList();
 
         MyUsersRecyclerViewAdapter adapter = new MyUsersRecyclerViewAdapter(usersList);
+
+        adapter.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // String id = usersList.get(recyclerViewUsers.getChildAdapterPosition(view)).getId());
+                Intent intent = new Intent(getContext(), SearchUserActivity.class);
+                intent.putExtra("id", usersList.get(recyclerViewUsers.getChildAdapterPosition(view)).getId());
+                intent.putExtra("name", usersList.get(recyclerViewUsers.getChildAdapterPosition(view)).getName());
+                intent.putExtra("phone", usersList.get(recyclerViewUsers.getChildAdapterPosition(view)).getPhone());
+                // Toast.makeText(getContext(),usersList.get(recyclerViewUsers.getChildAdapterPosition(view)).getId(),Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            }
+        });
+
         recyclerViewUsers.setAdapter(adapter);
 
         return view;

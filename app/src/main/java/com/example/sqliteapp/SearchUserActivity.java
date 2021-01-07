@@ -20,6 +20,7 @@ public class SearchUserActivity extends AppCompatActivity {
 
     ConectSQliteHelper conn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,13 @@ public class SearchUserActivity extends AppCompatActivity {
         conn = new ConectSQliteHelper(this, "db_users", null, 1);
 
         findViews();
+
+        Bundle args = this.getIntent().getExtras();
+        if (!args.isEmpty()) {
+            etId.getEditText().setText(Integer.toString(args.getInt("id")));
+            etName.getEditText().setText(args.getString("name"));
+            etPhone.getEditText().setText(args.getString("phone"));
+        }
 
         onClickSearchUser();
         onClickUpdateUser();

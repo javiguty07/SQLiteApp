@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
-    
+
     private void registerUsersBySql() {
         ConectSQliteHelper conn = new ConectSQliteHelper(this, "db_users", null, 1);
 
