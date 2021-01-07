@@ -2,6 +2,7 @@ package com.example.sqliteapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,6 +29,33 @@ public class SearchUserActivity extends AppCompatActivity {
 
         findViews();
 
+        onClickSearchUser();
+        onClickUpdateUser();
+        onClickDeleteUser();
+    }
+
+    private void onClickDeleteUser() {
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                deleteUser();
+            }
+        });
+    }
+
+    private void onClickUpdateUser() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                updateUser();
+            }
+        });
+    }
+
+    private void onClickSearchUser() {
         btnSearch.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -38,13 +66,40 @@ public class SearchUserActivity extends AppCompatActivity {
         });
     }
 
+    private void deleteUser() {
+        SQLiteDatabase db = conn.getReadableDatabase();
+        String[] params = {etId.getEditText().getText().toString()};
+
+        db.delete(Utilities.TABLE_USERS, Utilities.FIELD_ID + "=?", params);
+        Toast.makeText(this, "Se elminino el usuario correctamente", Toast.LENGTH_LONG).show();
+        db.close();
+    }
+
+
+    private void updateUser() {
+
+        SQLiteDatabase db = conn.getReadableDatabase();
+        String[] params = {etId.getEditText().getText().toString()};
+
+        ContentValues values = new ContentValues();
+        values.put(Utilities.FIELD_NAME, etName.getEditText().getText().toString());
+        values.put(Utilities.FIELD_PHONE, etPhone.getEditText().getText().toString());
+
+        db.update(Utilities.TABLE_USERS, values, Utilities.FIELD_ID + "=?", params);
+
+        Toast.makeText(this, "Actualizado correctamente", Toast.LENGTH_LONG).show();
+        db.close();
+
+    }
+
     private void searchBySql() {
         SQLiteDatabase db = conn.getReadableDatabase();
         String[] params = {etId.getEditText().getText().toString()};
 
+
         try {
             //Select name,phone from users where id = ?
-            Cursor cursor = db.rawQuery("SELECT "+Utilities.FIELD_NAME + ","+Utilities.FIELD_PHONE +" FROM " + Utilities.TABLE_USERS +" WHERE "+Utilities.FIELD_ID + " =?", params);
+            Cursor cursor = db.rawQuery("SELECT " + Utilities.FIELD_NAME + "," + Utilities.FIELD_PHONE + " FROM " + Utilities.TABLE_USERS + " WHERE " + Utilities.FIELD_ID + " =?", params);
 
             cursor.moveToFirst();
 
@@ -52,7 +107,7 @@ public class SearchUserActivity extends AppCompatActivity {
             etPhone.getEditText().setText(cursor.getString(1));
             cursor.close();
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             Toast.makeText(this, "El documento no existe", Toast.LENGTH_LONG).show();
             clean();
