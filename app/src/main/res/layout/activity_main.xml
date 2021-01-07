@@ -20,9 +20,19 @@
         android:id="@+id/btnSearchActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="Buscar usuarios"
         app:layout_constraintEnd_toEndOf="@+id/btnRegister"
         app:layout_constraintStart_toStartOf="@+id/btnRegister"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+    <Button
+        android:id="@+id/buttonListUsersActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Lista de Usuarios"
+        app:layout_constraintEnd_toEndOf="@+id/btnSearchActivity"
+        app:layout_constraintStart_toStartOf="@+id/btnSearchActivity"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearchActivity" />
 </androidx.constraintlayout.widget.ConstraintLayout>

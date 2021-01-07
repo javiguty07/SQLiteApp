@@ -1,7 +1,5 @@
 package com.example.sqliteapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sqliteapp.utilities.Utilities;
 import com.google.android.material.textfield.TextInputLayout;
@@ -74,7 +74,6 @@ public class SearchUserActivity extends AppCompatActivity {
         Toast.makeText(this, "Se elminino el usuario correctamente", Toast.LENGTH_LONG).show();
         db.close();
     }
-
 
     private void updateUser() {
 

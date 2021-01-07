@@ -1,15 +1,15 @@
 package com.example.sqliteapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button btnRegister, btnSearchActivity;
+    Button btnRegister, btnSearchActivity , btnListUsersActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnListUsersActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UserListActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -41,6 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btnRegister);
         btnSearchActivity = findViewById(R.id.btnSearchActivity);
-
+        btnListUsersActivity = findViewById(R.id.buttonListUsersActivity);
     }
 }
